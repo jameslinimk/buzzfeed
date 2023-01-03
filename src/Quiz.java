@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -59,14 +60,23 @@ public class Quiz {
      * Asks the questions and stores the scores
      */
     public void askQuestions() {
-        for (int x = 0; x < questions.size(); x++) {
-            String question = questions.get(x);
-            ArrayList<String> answers = this.answers.get(x);
-            ArrayList<Integer> scores = this.scores.get(x);
+        // Shuffle indexes
+        ArrayList<Integer> indexes = new ArrayList<>();
+        for (int i = 0; i < questions.size(); i++) {
+            indexes.add(i);
+        }
+        Collections.shuffle(indexes);
+
+        // Ask questions
+        for (int x = 0; x < indexes.size(); x++) {
+            int y = indexes.get(x);
+            String question = questions.get(y);
+            ArrayList<String> answers = this.answers.get(y);
+            ArrayList<Integer> scores = this.scores.get(y);
 
             // Print question and answers
             System.out.println();
-            Color.colorPrintln(Color.BLUE, question);
+            Color.colorPrintln(Color.BLUE, "(" + (x + 1) + "/" + indexes.size() + ") " + question);
             for (int i = 0; i < answers.size(); i++) {
                 Color.colorPrintln(Color.YELLOW, (i + 1) + ") " + answers.get(i));
             }

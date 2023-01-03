@@ -45,7 +45,8 @@ public class QuizPicker {
             }
 
 			// Ask quiz
-			Quiz quiz = quizzes.get((String) quizzes.keySet().toArray()[quizIndex - 1]);
+			String name = (String) quizzes.keySet().toArray()[quizIndex - 1];
+			Quiz quiz = quizzes.get(name);
 			quiz.askQuestions();
 
 			// Print response
